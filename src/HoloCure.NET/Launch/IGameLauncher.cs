@@ -17,6 +17,6 @@ namespace HoloCure.NET.Launch
         /// </summary>
         /// <param name="args">The game's launch arguments.</param>
         /// <returns>The instantiated game.</returns>
-        Game LaunchGame(string[] args);
+        Game? LaunchGame(string[] args);
     }
 }
