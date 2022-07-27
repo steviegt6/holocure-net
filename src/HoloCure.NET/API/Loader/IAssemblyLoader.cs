@@ -1,4 +1,5 @@
-﻿using HoloCure.NET.API.Registry;
+﻿using System.Collections.Generic;
+using HoloCure.NET.API.Registry;
 
 namespace HoloCure.NET.API.Loader
 {
@@ -17,5 +18,11 @@ namespace HoloCure.NET.API.Loader
         /// </summary>
         /// <param name="prober">The prober to add.</param>
         void AddProber(IAssemblyProber prober);
+
+        IEnumerable<IModMetadata> ResolveMods();
+
+        IEnumerable<IModMetadata> OrganizeMods(IAssemblyOrganizer organizer);
+
+        void LoadMods();
     }
 }

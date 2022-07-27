@@ -15,7 +15,7 @@ namespace HoloCure.NET.API
         /// <summary>
         ///     The loaded mod assembly.
         /// </summary>
-        Assembly Assembly { get; set; }
+        Assembly? Assembly { get; set; }
 
         /// <summary>
         ///     The loaded mod instance. Null before the mod is loaded and when the mod fails to load.

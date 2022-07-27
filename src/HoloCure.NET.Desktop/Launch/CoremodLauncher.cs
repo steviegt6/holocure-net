@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
+using Felt.Needle;
+using Felt.Needle.API;
+using HoloCure.NET.API.Loader;
+using HoloCure.NET.Desktop.Loader;
 using HoloCure.NET.Launch;
 using Microsoft.Xna.Framework;
+using Mono.Cecil;
 
 namespace HoloCure.NET.Desktop.Launch
 {
@@ -13,17 +19,26 @@ namespace HoloCure.NET.Desktop.Launch
         public const string ALC_NAME = "Desktop ALC";
         public IGameBootstrapper Bootstrapper { get; } = new CoremodBootstrapper();
 
+        public IAssemblyLoader AssemblyLoader { get; } = new DesktopAssemblyLoader();
+
         private readonly AssemblyLoadContext LoadContext = new(ALC_NAME);
 
+        private readonly IModuleHandler ModuleHandler = new StandardModuleHandler(
+            new StandardModuleResolver(),
+            new StandardModuleWriter(),
+            new StandardModuleTransformer()
+        );
+
         public Game? LaunchGame(string[] args) {
-            AppDomain.CurrentDomain.AssemblyLoad += TransformLoadedAssemblies;
+            // AppDomain.CurrentDomain.AssemblyLoad += TransformAssembly;
             Bootstrapper.Bootstrap(this);
+            AssemblyLoader.LoadMods();
 
             Assembly desktopAsm = ReloadAssemblies();
-            Type launcher = desktopAsm.GetType("HoloCure.NET.Desktop.Program")!;
-            MethodInfo create = launcher.GetMethod("Main", BindingFlags.Static | BindingFlags.Public)!;
+            Type program = desktopAsm.GetType("HoloCure.NET.Desktop.Program")!;
+            MethodInfo main = program.GetMethod("Main", BindingFlags.Static | BindingFlags.Public)!;
 
-            create.Invoke(null, new object?[] {args.Concat(new[] {"--skip-coremods"}).ToArray()});
+            main.Invoke(null, new object?[] {args.Concat(new[] {"--skip-coremods"}).ToArray()});
 
             return null;
         }
@@ -37,6 +52,7 @@ namespace HoloCure.NET.Desktop.Launch
 
                 if (name == "mscorlib") continue; // Skip core library.
                 if (name == "System" || name.StartsWith("System.")) continue; // Skip System assemblies.
+                if (assembly.IsDynamic) continue; // Skip dynamic assemblies.
                 // if (name == "FNA") continue; // Skip FNA.
 
                 asmsToReload.Add(assembly);
@@ -44,7 +60,8 @@ namespace HoloCure.NET.Desktop.Launch
 
             foreach (Assembly assembly in asmsToReload) {
                 string name = assembly.GetName().Name ?? "";
-                Assembly asm = LoadContext.LoadFromAssemblyPath(assembly.Location);
+                using Stream transformedStream = TransformAssembly(assembly);
+                Assembly asm = LoadContext.LoadFromStream(transformedStream);
 
                 if (name == "HoloCure.NET.Desktop") desktopAsm = asm;
             }
@@ -52,12 +69,24 @@ namespace HoloCure.NET.Desktop.Launch
             return desktopAsm;
         }
 
-        private static void TransformLoadedAssemblies(object? sender, AssemblyLoadEventArgs args) {
-            Console.WriteLine(args.LoadedAssembly.GetName().Name + " | " + AssemblyLoadContext.GetLoadContext(args.LoadedAssembly)?.Name);
-            if (AssemblyLoadContext.GetLoadContext(args.LoadedAssembly)?.Name != ALC_NAME) return;
-            if (args.LoadedAssembly.GetName().Name == "FNA") return; // Don't transform FNA
+        private Stream TransformAssembly(Assembly asm) {
+            Console.WriteLine(asm.GetName().Name + " | " + AssemblyLoadContext.GetLoadContext(asm)?.Name);
+            // if (AssemblyLoadContext.GetLoadContext(asm)?.Name != ALC_NAME) return;
 
-            // TODO: Transform loaded assemblies.
+            // TODO: Null safety
+            ModuleDefinition module = ModuleHandler.ModuleResolver.ResolveFromPath(asm.Location)!;
+            IEnumerable<ICecilPlugin> plugins = AssemblyLoader.ModRegistrar.RegisteredContent.Values
+                                                              .Select(x => x.Mod)
+                                                              .SelectMany(x => x!.GetCecilPlugins());
+            
+            foreach (ICecilPlugin plugin in plugins) {
+                plugin.TransformModule(module);
+            }
+
+            MemoryStream stream = new();
+            ModuleHandler.ModuleWriter.Write(module, stream);
+            stream.Seek(0, SeekOrigin.Begin);
+            return stream;
         }
     }
 }

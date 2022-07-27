@@ -13,6 +13,10 @@ namespace HoloCure.NET.API
         /// </summary>
         [JsonProperty("mod_id")]
         [DefaultValue("")]
-        public string ModId { get; } = "";
+        public string ModId { get; set; } = "";
+
+        [JsonProperty("coremod")]
+        [DefaultValue(false)]
+        public bool Coremod { get; set; } = false;
     }
 }

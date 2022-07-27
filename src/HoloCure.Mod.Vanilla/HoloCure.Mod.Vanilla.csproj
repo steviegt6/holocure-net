@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="../shared.targets" />
+
+    <ItemGroup>
+      <ProjectReference Include="..\HoloCure.NET\HoloCure.NET.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="manifest.json" />
+      <EmbeddedResource Include="manifest.json" />
+    </ItemGroup>
+
+</Project>

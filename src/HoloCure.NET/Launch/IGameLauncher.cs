@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HoloCure.NET.API.Loader;
+using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET.Launch
 {
@@ -11,6 +12,8 @@ namespace HoloCure.NET.Launch
         ///     The bootstrapper this launcher should bootstrapper launching with.
         /// </summary>
         IGameBootstrapper Bootstrapper { get; }
+
+        IAssemblyLoader AssemblyLoader { get; }
 
         /// <summary>
         ///     Instantiates and launches a game.
