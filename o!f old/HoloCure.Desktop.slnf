@@ -1,0 +1,11 @@
+﻿{
+  "solution": {
+    "path": "HoloCure.sln",
+    "projects": [
+      "HoloCure.Desktop\\HoloCure.Desktop.csproj",
+      "HoloCure.Game\\HoloCure.Game.csproj",
+      "HoloCure.Game.Tests\\HoloCure.Game.Tests.csproj",
+      "HoloCure.Resources\\HoloCure.Resources.csproj"
+    ]
+  }
+}

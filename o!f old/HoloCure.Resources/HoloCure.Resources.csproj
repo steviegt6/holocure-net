@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../shared.targets"/>
+
+  <PropertyGroup Label="Project Defaults">
+    <ProjectVersion>1.0.0</ProjectVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\**\*"/>
+    <EmbeddedResource Include="Samples\**\*"/>
+    <EmbeddedResource Include="Textures\**\*"/>
+    <EmbeddedResource Include="Tracks\**\*"/>
+  </ItemGroup>
+</Project>

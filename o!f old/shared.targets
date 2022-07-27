@@ -1,0 +1,29 @@
+<Project ToolsVersion="14.0">
+
+  <!-- region Project defaults -->
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>default</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- endregion -->
+
+  <!-- region Version handling -->
+
+  <!-- Default version -->
+  <PropertyGroup Condition=" '$(ProjectVersion)' == '' ">
+    <ProjectVersion>0.0.0</ProjectVersion>
+  </PropertyGroup>
+
+  <!-- Assign assembly version data. -->
+  <PropertyGroup>
+    <AssemblyVersion>$(ProjectVersion)</AssemblyVersion>
+    <AssemblyFileVersion>$(ProjectVersion)</AssemblyFileVersion>
+    <AssemblyInformationalVersion>$(ProjectVersion)</AssemblyInformationalVersion>
+  </PropertyGroup>
+
+  <!-- endregion -->
+
+</Project>
