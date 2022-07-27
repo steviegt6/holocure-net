@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    
+    <Import Project="../shared.targets" />
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="fnalibs" Version="21.7.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\HoloCure.NET\HoloCure.NET.csproj" />
+    </ItemGroup>
+
+</Project>
