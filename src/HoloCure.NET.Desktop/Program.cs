@@ -4,6 +4,7 @@ using HoloCure.NET.Desktop.Launch;
 using HoloCure.NET.Desktop.Util;
 using HoloCure.NET.Launch;
 using HoloCure.NET.Logging;
+using HoloCure.NET.Util;
 using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET.Desktop
@@ -20,7 +21,7 @@ namespace HoloCure.NET.Desktop
 #endif
                 );
 
-                logger = launcher.Logger;
+                logger = launcher.GetLogger();
                 logger.Log($"Program started with launch arguments: {string.Join(", ", args)}", LogLevels.Debug);
 
                 using Game? game = launcher.LaunchGame(args);
