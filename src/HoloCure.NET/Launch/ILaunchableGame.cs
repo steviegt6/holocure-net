@@ -1,18 +1,15 @@
-﻿namespace HoloCure.NET.Launch
+﻿using Microsoft.Xna.Framework;
+
+namespace HoloCure.NET.Launch
 {
     /// <summary>
     ///     Represents a <see cref="Game"/> that should be launched from a <see cref="IGameLauncher"/>.
     /// </summary>
-    public interface ILaunchable
+    public interface ILaunchableGame
     {
         /// <summary>
         ///     The launcher used to launch this game.
         /// </summary>
         IGameLauncher Launcher { get; }
-
-        /// <summary>
-        ///     The launch arguments passed to this game by the launcher.
-        /// </summary>
-        string[] Arguments { get; }
     }
 }

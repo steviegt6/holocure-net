@@ -18,30 +18,17 @@ namespace HoloCure.NET.Desktop.Launch
 
         public IServiceCollection Dependencies { get; } = new ServiceCollection();
 
-        public DesktopGameLauncher() {
+        public DesktopGameLauncher(IStorageProvider storageProvider, ILogger logger, string[] args) {
             Dependencies.AddSingleton<IGameLauncher>(this);
-            Dependencies.AddSingleton(new GameData(GAME_NAME));
-            Dependencies.AddSingleton<IGameBootstrapper>(new DesktopGameBootstrapper());
+            Dependencies.AddSingleton(new GameData(GAME_NAME, args));
             Dependencies.AddSingleton<IAssemblyLoader>(new DesktopAssemblyLoader());
-            IStorageProvider storageProvider = PlatformUtils.MakePlatformDependentStorageProvider(GAME_NAME);
             Dependencies.AddSingleton(storageProvider);
-            Dependencies.AddSingleton<ILogger>(
-                new DesktopLogger(
-                    // Log to the console.
-                    new ConsoleLogWriter(),
-                    // Log to an archivable log file (one that won't be cleared).
-                    new ArchivableFileLogWriter(Path.Combine(storageProvider.GetDirectory(), "game"), ".log", DateTime.Now),
-                    // Log to a temporary log file ("latest.log")
-                    new TemporaryFileLogWriter(Path.Combine(storageProvider.GetDirectory(), "latest"), ".log")
-                )
-            );
+            Dependencies.AddSingleton(logger);
         }
 
         public Game LaunchGame(string[] args) {
-            ILogger logger = this.GetLogger();
-            IGameBootstrapper bootstrapper = this.GetGameBoostrapper();
-            logger.Log("Launching game..", LogLevels.Debug);
-            bootstrapper.Bootstrap(this);
+            this.GetAssemblyLoader().LoadMods();
+            this.GetLogger().Log("Launching game...", LogLevels.Debug);
             return new HoloCureGame(this, args);
         }
     }

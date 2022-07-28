@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET
 {
-    public sealed class HoloCureGame : Game, ILaunchable
+    public sealed class HoloCureGame : Game, ILaunchableGame
     {
         public IGameLauncher Launcher { get; }
 

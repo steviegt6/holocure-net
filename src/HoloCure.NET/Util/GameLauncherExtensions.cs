@@ -37,11 +37,7 @@ namespace HoloCure.NET.Util
         public static GameData GetGameData(this IGameLauncher launcher) {
             return launcher.GetService<GameData>();
         }
-        
-        public static IGameBootstrapper GetGameBoostrapper(this IGameLauncher launcher) {
-            return launcher.GetService<IGameBootstrapper>();
-        }
-        
+
         public static IAssemblyLoader GetAssemblyLoader(this IGameLauncher launcher) {
             return launcher.GetService<IAssemblyLoader>();
         }
