@@ -1,4 +1,5 @@
-﻿using HoloCure.NET.Launch;
+﻿using System;
+using HoloCure.NET.Launch;
 using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET
@@ -21,7 +22,7 @@ namespace HoloCure.NET
 
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
-
+            
             base.Draw(gameTime);
         }
     }

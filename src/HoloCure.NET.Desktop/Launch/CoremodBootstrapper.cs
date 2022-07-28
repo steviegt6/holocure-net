@@ -1,4 +1,5 @@
-﻿using HoloCure.NET.Launch;
+﻿#if COREMODDING
+using HoloCure.NET.Launch;
 
 namespace HoloCure.NET.Desktop.Launch
 {
@@ -8,3 +9,4 @@ namespace HoloCure.NET.Desktop.Launch
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if COREMODDING
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -90,3 +91,4 @@ namespace HoloCure.NET.Desktop.Launch
         }
     }
 }
+#endif
