@@ -9,6 +9,7 @@ using Felt.Needle;
 using Felt.Needle.API;
 using HoloCure.NET.API.Loader;
 using HoloCure.NET.Desktop.Loader;
+using HoloCure.NET.Desktop.Util;
 using HoloCure.NET.Launch;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
@@ -18,9 +19,13 @@ namespace HoloCure.NET.Desktop.Launch
     public class CoremodLauncher : IGameLauncher
     {
         public const string ALC_NAME = "Desktop ALC";
+
+        public string GameName => DesktopGameLauncher.GAME_NAME;
         public IGameBootstrapper Bootstrapper { get; } = new CoremodBootstrapper();
 
         public IAssemblyLoader AssemblyLoader { get; } = new DesktopAssemblyLoader();
+
+        public IStorageProvider StorageProvider { get; } = PlatformUtils.MakePlatformDependentStorageProvider(DesktopGameLauncher.GAME_NAME);
 
         private readonly AssemblyLoadContext LoadContext = new(ALC_NAME);
 
