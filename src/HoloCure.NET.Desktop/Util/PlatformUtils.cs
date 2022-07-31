@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
+using HoloCure.Core.Launch;
 using HoloCure.NET.Desktop.Launch.Platform;
-using HoloCure.NET.Launch;
 
 namespace HoloCure.NET.Desktop.Util
 {

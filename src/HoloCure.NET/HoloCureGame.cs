@@ -1,5 +1,5 @@
 ﻿using System;
-using HoloCure.NET.Launch;
+using HoloCure.Core.Launch;
 using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using HoloCure.NET.API;
+using HoloCure.Core.API;
 using HoloCure.NET.Desktop.Loader;
 using Newtonsoft.Json;
 
@@ -22,7 +22,7 @@ namespace HoloCure.NET.Desktop.Util
 
         public static void LoadManifestFile(this IModMetadata metadata) {
             // TODO: null safety here
-            string manifestFile = metadata.Assembly!.GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(DesktopAssemblyLoader.MANIFEST_NAME))!;
+            string manifestFile = metadata.Assembly!.GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(AssemblyLoader.MANIFEST_NAME))!;
             using Stream stream = metadata.Assembly.GetManifestResourceStream(manifestFile)!;
             using TextReader reader = new StreamReader(stream);
             metadata.Manifest = JsonConvert.DeserializeObject<ModFileManifest>(reader.ReadToEnd());

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
-using HoloCure.NET.API.Loader;
+using HoloCure.Core.API.Loader;
+using HoloCure.Core.Launch;
+using HoloCure.Core.Logging;
+using HoloCure.Core.Util;
 using HoloCure.NET.Desktop.Loader;
 using HoloCure.NET.Desktop.Logging;
 using HoloCure.NET.Desktop.Util;
-using HoloCure.NET.Launch;
-using HoloCure.NET.Logging;
-using HoloCure.NET.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 
@@ -21,7 +21,7 @@ namespace HoloCure.NET.Desktop.Launch
         public DesktopGameLauncher(IStorageProvider storageProvider, ILogger logger, string[] args) {
             Dependencies.AddSingleton<IGameLauncher>(this);
             Dependencies.AddSingleton(new GameData(GAME_NAME, args));
-            Dependencies.AddSingleton<IAssemblyLoader>(new DesktopAssemblyLoader());
+            Dependencies.AddSingleton<IAssemblyLoader>(new AssemblyLoader());
             Dependencies.AddSingleton(storageProvider);
             Dependencies.AddSingleton(logger);
         }

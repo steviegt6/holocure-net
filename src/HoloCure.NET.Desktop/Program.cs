@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
+using HoloCure.Core.Launch;
+using HoloCure.Core.Logging;
 using HoloCure.NET.Desktop.Exceptions;
 using HoloCure.NET.Desktop.Launch;
 using HoloCure.NET.Desktop.Logging;
+using HoloCure.NET.Desktop.Logging.Writers;
 using HoloCure.NET.Desktop.Util;
-using HoloCure.NET.Launch;
-using HoloCure.NET.Logging;
 using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET.Desktop

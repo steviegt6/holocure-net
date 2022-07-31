@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HoloCure.NET.Logging;
+using HoloCure.Core.Logging;
 
 namespace HoloCure.NET.Desktop.Logging
 {

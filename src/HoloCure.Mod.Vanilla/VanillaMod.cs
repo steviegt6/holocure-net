@@ -1,4 +1,4 @@
-﻿using HoloCure.NET.API;
+﻿using HoloCure.Core.API;
 
 namespace HoloCure.Mod.Vanilla
 {
