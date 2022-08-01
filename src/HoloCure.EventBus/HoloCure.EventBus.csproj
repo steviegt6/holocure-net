@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Events" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\HoloCure.Reflection\HoloCure.Reflection.csproj" />
     </ItemGroup>
 

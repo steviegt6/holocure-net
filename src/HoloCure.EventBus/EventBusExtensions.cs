@@ -2,7 +2,7 @@
 using HoloCure.EventBus.Attributes;
 using HoloCure.EventBus.Exceptions;
 
-namespace HoloCure.EventBus.Extensions
+namespace HoloCure.EventBus
 {
     public static class EventBusExtensions
     {
@@ -27,30 +27,39 @@ namespace HoloCure.EventBus.Extensions
         }
 
         private static void RegisterGenericTypedDelegate(Type type, IEventBus eventBus, Delegate d) {
-            MethodInfo method = typeof(EventBusExtensions).GetMethod(nameof(RegisterDelegate), BindingFlags.Public | BindingFlags.Static)!;
-            MethodInfo generic = method.MakeGenericMethod(type);
-            generic.Invoke(null, new object[] {eventBus, d});
+            // TODO: Null safety / checks.
+            MethodInfo? method = typeof(EventBusExtensions).GetMethod(nameof(RegisterDelegate), BindingFlags.Public | BindingFlags.Static);
+            MethodInfo? generic = method?.MakeGenericMethod(type);
+            generic?.Invoke(null, new object[] {eventBus, d});
         }
 
+        /// <summary>
+        ///     Register any methods subscribing to an event in a listener type.
+        /// </summary>
+        /// <param name="eventBus">this</param>
+        /// <param name="type">The static type.</param>
         public static void RegisterStaticType(this IEventBus eventBus, Type type) {
-            foreach ((Type eventType, MethodInfo listener) in GetMethods(type, BindingFlags.Public | BindingFlags.Static)) {
-                Type actionType = typeof(Action<>).MakeGenericType(eventType);
-                RegisterGenericTypedDelegate(eventType, eventBus, Delegate.CreateDelegate(actionType, null, listener));
-            }
+            RegisterMethods(eventBus, type, null, BindingFlags.Public | BindingFlags.Static);
         }
 
+        /// <summary>
+        ///     Register any methods subscribing to an event in a listener instance.
+        /// </summary>
+        /// <param name="eventBus">this</param>
+        /// <param name="instance">The object instance.</param>
         public static void RegisterInstance(this IEventBus eventBus, object instance) {
-            foreach ((Type eventType, MethodInfo listener) in GetMethods(instance.GetType(), BindingFlags.Public | BindingFlags.Instance)) {
+            RegisterMethods(eventBus, instance.GetType(), instance, BindingFlags.Public | BindingFlags.Instance);
+        }
+
+        private static void RegisterMethods(IEventBus eventBus, Type type, object? instance, BindingFlags flags) {
+            foreach ((Type eventType, MethodInfo listener) in GetMethods(type, flags)) {
                 Type actionType = typeof(Action<>).MakeGenericType(eventType);
                 RegisterGenericTypedDelegate(eventType, eventBus,  Delegate.CreateDelegate(actionType, instance, listener));
             }
         }
 
         private static IEnumerable<(Type, MethodInfo)> GetMethods(Type type, BindingFlags flags) {
-            // Collect all public static methods
             IEnumerable<MethodInfo> methods = type.GetMethods(flags);
-
-            // Cull down to all that are decorated with the expected attribute.
             methods = methods.Where(x => x.GetCustomAttribute<SubscriberAttribute>() != null);
 
             foreach (MethodInfo method in methods) {

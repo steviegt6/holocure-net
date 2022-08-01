@@ -4,7 +4,6 @@ using System.IO;
 using HoloCure.Core.Launch;
 using HoloCure.EventBus;
 using HoloCure.EventBus.Attributes;
-using HoloCure.EventBus.Extensions;
 using HoloCure.Logging;
 using HoloCure.Logging.Levels;
 using HoloCure.NET.Desktop.Exceptions;
@@ -52,6 +51,14 @@ namespace HoloCure.NET.Desktop
         public static void TestEventListener6(TestEvent theEvent) {
             A++;
         }
+
+        public class B
+        {
+            [Subscriber]
+            public void Test(TestEvent theEvent) {
+                A++;
+            }
+        }
         
         public static void Main(string[] args) {
             Stopwatch sw = new();
@@ -62,11 +69,14 @@ namespace HoloCure.NET.Desktop
             
             sw.Restart();
             bus.RegisterStaticType(typeof(Program));
+            bus.RegisterInstance(new B());
+            bus.RegisterDelegate<TestEvent>((theEvent => { A++; }));
+            bus.RegisterDelegate(typeof(TestEvent), theEvent => { A++; });
             sw.Stop();
             Console.WriteLine("Register: " + sw.ElapsedMilliseconds);
             
             sw.Restart();
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 bus.DispatchEvent(new TestEvent());
             }
             sw.Stop();
