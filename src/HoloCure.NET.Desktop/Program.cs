@@ -17,71 +17,7 @@ namespace HoloCure.NET.Desktop
 {
     public static class Program
     {
-        public class TestEvent : IEvent { }
-
-        public static int A;
-
-
-        [Subscriber]
-        public static void TestEventListener1(TestEvent theEvent) {
-            A++;
-        }
-        
-        [Subscriber]
-        public static void TestEventListener2(TestEvent theEvent) {
-            A++;
-        }
-        
-        [Subscriber]
-        public static void TestEventListener3(TestEvent theEvent) {
-            A++;
-        }
-        
-        [Subscriber]
-        public static void TestEventListener4(TestEvent theEvent) {
-            A++;
-        }
-        
-        [Subscriber]
-        public static void TestEventListener5(TestEvent theEvent) {
-            A++;
-        }
-        
-        [Subscriber]
-        public static void TestEventListener6(TestEvent theEvent) {
-            A++;
-        }
-
-        public class B
-        {
-            [Subscriber]
-            public void Test(TestEvent theEvent) {
-                A++;
-            }
-        }
-        
         public static void Main(string[] args) {
-            Stopwatch sw = new();
-            sw.Start();
-            IEventBus bus = new SimpleEventBus();
-            sw.Stop();
-            Console.WriteLine("Init: " + sw.ElapsedMilliseconds);
-            
-            sw.Restart();
-            bus.RegisterStaticType(typeof(Program));
-            bus.RegisterInstance(new B());
-            bus.RegisterDelegate<TestEvent>((theEvent => { A++; }));
-            bus.RegisterDelegate(typeof(TestEvent), theEvent => { A++; });
-            sw.Stop();
-            Console.WriteLine("Register: " + sw.ElapsedMilliseconds);
-            
-            sw.Restart();
-            for (int i = 0; i < 10000; i++) {
-                bus.DispatchEvent(new TestEvent());
-            }
-            sw.Stop();
-            Console.WriteLine("Dispatch: " + sw.ElapsedMilliseconds);
-            return;
             // Initialize FNA first, we want to be able to reliably load SDL for message boxes.
             // After that, immediately create a storage provider and logger - if that fails, we cannot do much.
             IStorageProvider storageProvider;

@@ -1,20 +1,42 @@
-﻿namespace HoloCure.EventBus
+﻿using HoloCure.EventBus.Store;
+
+namespace HoloCure.EventBus
 {
     /// <summary>
     ///     An <see cref="IEventBus"/> instance capable of dispatching to other <see cref="IEventBus"/> instance.
     /// </summary>
     public class MasterEventBus : IEventBus
     {
-        protected virtual List<IEventBus> ChildEventBuses { get; } = new();
+        /// <summary>
+        ///     An unimplemented <see cref="IEventStore"/>, since the <see cref="MasterEventBus"/> managers child <see cref="IEventBus"/> instances that have their own <see cref="IEventStore"/> instances.
+        /// </summary>
+        public class MasterEventStore : IEventStore
+        {
+            public IDictionary<Type, IDictionary<int, IEventSubscriber>> Subscribers => throw new NotImplementedException();
 
-        public virtual void DispatchEvent(Type eventType, IEvent theEvent) {
-            foreach (IEventBus childEventBus in ChildEventBuses) 
-                childEventBus.DispatchEvent(eventType, theEvent);
+            public int RegisterSubscriber(Type eventType, IEventSubscriber subscriber) {
+                throw new NotImplementedException();
+            }
+
+            public void UnregisterSubscriber(Type eventType, int subscriberId) {
+                throw new NotImplementedException();
+            }
+
+            public IEnumerable<IEventSubscriber> GetSubscribers(Type eventType) {
+                throw new NotImplementedException();
+            }
         }
 
-        public virtual void RegisterDelegate(Type eventType, Action<IEvent> eventDelegate) {
-            foreach (IEventBus eventBus in ChildEventBuses) 
-                eventBus.RegisterDelegate(eventType, eventDelegate);
+        protected virtual List<IEventBus> ChildEventBuses { get; } = new();
+
+        public virtual IEventStore EventStore { get; } = new MasterEventStore();
+
+        public virtual void Post(Type eventType, IEvent theEvent) {
+            foreach (IEventBus childEventBus in ChildEventBuses) childEventBus.Post(eventType, theEvent);
+        }
+
+        public virtual void Subscribe(Type eventType, IEventSubscriber subscriber) {
+            foreach (IEventBus eventBus in ChildEventBuses) eventBus.Subscribe(eventType, subscriber);
         }
 
         public virtual void AddEventBus(IEventBus eventBus) {

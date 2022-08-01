@@ -1,4 +1,6 @@
-﻿namespace HoloCure.EventBus
+﻿using HoloCure.EventBus.Store;
+
+namespace HoloCure.EventBus
 {
     /// <summary>
     ///     An event bus which handles dispatching.
@@ -6,17 +8,22 @@
     public interface IEventBus
     {
         /// <summary>
-        ///     Dispatch an event to all registered listeners.
+        ///     The <see cref="IEventStore"/> which manages <see cref="IEventSubscriber"/>s that belong to this <see cref="IEventBus"/>.
+        /// </summary>
+        IEventStore EventStore { get; }
+
+        /// <summary>
+        ///     Post an event to all registered subscribers.
         /// </summary>
         /// <param name="eventType">The explicitly-defined event type.</param>
         /// <param name="theEvent">The event instance to dispatch.</param>
-        void DispatchEvent(Type eventType, IEvent theEvent);
+        void Post(Type eventType, IEvent theEvent);
 
         /// <summary>
-        ///     Register a listener in some form for an event.
+        ///     Subscribes the given delegate to posts according to the given <paramref name="eventType"/>.
         /// </summary>
         /// <param name="eventType">The explicitly-defined event type.</param>
-        /// <param name="eventDelegate">The event delegate.</param>
-        void RegisterDelegate(Type eventType, Action<IEvent> eventDelegate);
+        /// <param name="subscriber">The subscriber that needs to be subscribed.</param>
+        void Subscribe(Type eventType, IEventSubscriber subscriber);
     }
 }

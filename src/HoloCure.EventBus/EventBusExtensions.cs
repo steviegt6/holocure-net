@@ -1,40 +1,51 @@
 ﻿using System.Reflection;
 using HoloCure.EventBus.Attributes;
 using HoloCure.EventBus.Exceptions;
+using HoloCure.EventBus.Store;
 
 namespace HoloCure.EventBus
 {
     public static class EventBusExtensions
     {
         /// <summary>
-        ///     Dispatch an event to all registered listeners.
+        ///     Post an event to all registered subscribers.
         /// </summary>
         /// <param name="eventBus">this</param>
         /// <param name="theEvent">The event instance to dispatch.</param>
-        public static void DispatchEvent<TEvent>(this IEventBus eventBus, TEvent theEvent)
+        public static void Post<TEvent>(this IEventBus eventBus, TEvent theEvent)
             where TEvent : IEvent {
-            eventBus.DispatchEvent(typeof(TEvent), theEvent);
+            eventBus.Post(typeof(TEvent), theEvent);
         }
 
         /// <summary>
-        ///     Register a listener in some form for an event.
+        ///     Subscribes the given delegate to posts according to the given <paramref name="eventType"/>.
+        /// </summary>
+        /// <param name="eventBus">this</param>
+        /// <param name="eventType">The explicitly-defined event type.</param>
+        /// <param name="eventDelegate">The event delegate.</param>
+        public static void SubscribeDelegate(this IEventBus eventBus, Type eventType, Action<IEvent> eventDelegate) {
+            eventBus.Subscribe(eventType, new DelegateEventSubscriber(eventDelegate));
+        }
+
+        /// <summary>
+        ///     Subscribes the given delegate to posts according to the given event type.
         /// </summary>
         /// <param name="eventBus">this</param>
         /// <param name="eventDelegate">The event delegate.</param>
-        public static void RegisterDelegate<TEvent>(this IEventBus eventBus, Action<TEvent> eventDelegate)
+        public static void SubscribeGenericDelegate<TEvent>(this IEventBus eventBus, Action<TEvent> eventDelegate)
             where TEvent : IEvent {
-            eventBus.RegisterDelegate(typeof(TEvent), theEvent => eventDelegate((TEvent) theEvent));
+            eventBus.Subscribe(typeof(TEvent), new GenericDelegateEventSubscriber<TEvent>(eventDelegate));
         }
 
         private static void RegisterGenericTypedDelegate(Type type, IEventBus eventBus, Delegate d) {
             // TODO: Null safety / checks.
-            MethodInfo? method = typeof(EventBusExtensions).GetMethod(nameof(RegisterDelegate), BindingFlags.Public | BindingFlags.Static);
+            MethodInfo? method = typeof(EventBusExtensions).GetMethod(nameof(SubscribeGenericDelegate), BindingFlags.Public | BindingFlags.Static);
             MethodInfo? generic = method?.MakeGenericMethod(type);
             generic?.Invoke(null, new object[] {eventBus, d});
         }
 
         /// <summary>
-        ///     Register any methods subscribing to an event in a listener type.
+        ///     Subscribes every static method in this <paramref name="type"/> to a corresponding event, given the first and only parameter of each method.
         /// </summary>
         /// <param name="eventBus">this</param>
         /// <param name="type">The static type.</param>
@@ -43,7 +54,7 @@ namespace HoloCure.EventBus
         }
 
         /// <summary>
-        ///     Register any methods subscribing to an event in a listener instance.
+        ///     Subscribes every instance method in see <paramref name="instance"/> to a corresponding event, given the first and only parameter of each method.
         /// </summary>
         /// <param name="eventBus">this</param>
         /// <param name="instance">The object instance.</param>
