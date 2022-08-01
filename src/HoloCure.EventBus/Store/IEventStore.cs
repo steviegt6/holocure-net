@@ -6,27 +6,19 @@
     public interface IEventStore
     {
         /// <summary>
-        ///     A map of all registered subscribers, where <see cref="Type"/>s point to collections of registered subscribers.
-        /// </summary>
-        /// <remarks>
-        ///     This map should typically not be accessed or modified outside of the <see cref="IEventStore"/>.
-        /// </remarks>
-        IDictionary<Type, IDictionary<int, IEventSubscriber>> Subscribers { get; }
-        
-        /// <summary>
         ///     Registers an event subscriber.
         /// </summary>
         /// <param name="eventType">The event type to register this subscriber under.</param>
         /// <param name="subscriber">The subscriber to register.</param>
-        /// <returns>A numerical identifier used to unregister this subscriber.</returns>
-        int RegisterSubscriber(Type eventType, IEventSubscriber subscriber);
+        /// <returns>The registered subscriber instance, which needs to be used when unregistering a subscriber.</returns>
+        IEventSubscriber RegisterSubscriber(Type eventType, IEventSubscriber subscriber);
         
         /// <summary>
         ///     Unregisters an event subscriber.
         /// </summary>
         /// <param name="eventType">The event type that the subscriber was registered under.</param>
-        /// <param name="subscriberId">The numerical identifier the subscriber was associated with.</param>
-        void UnregisterSubscriber(Type eventType, int subscriberId);
+        /// <param name="subscriber">The registered subscriber to unregister.</param>
+        void UnregisterSubscriber(Type eventType, IEventSubscriber subscriber);
         
         /// <summary>
         ///     Get a collection of subscribers which fall under this type.

@@ -12,13 +12,11 @@ namespace HoloCure.EventBus
         /// </summary>
         public class MasterEventStore : IEventStore
         {
-            public IDictionary<Type, IDictionary<int, IEventSubscriber>> Subscribers => throw new NotImplementedException();
-
-            public int RegisterSubscriber(Type eventType, IEventSubscriber subscriber) {
+            public IEventSubscriber RegisterSubscriber(Type eventType, IEventSubscriber subscriber) {
                 throw new NotImplementedException();
             }
 
-            public void UnregisterSubscriber(Type eventType, int subscriberId) {
+            public void UnregisterSubscriber(Type eventType, IEventSubscriber subscriberId) {
                 throw new NotImplementedException();
             }
 

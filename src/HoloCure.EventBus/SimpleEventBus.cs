@@ -1,4 +1,5 @@
-﻿using HoloCure.EventBus.Store;
+﻿using System.Runtime.CompilerServices;
+using HoloCure.EventBus.Store;
 
 namespace HoloCure.EventBus
 {
