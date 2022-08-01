@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace HoloCure.Core.Logging
+namespace HoloCure.Logging.Levels
 {
     public static class LogLevels
     {
-        public readonly record struct LogLevel(string Name, ConsoleColor? BackgroundColor, ConsoleColor? ForegroundColor) : ILogLevel;
+        public readonly record struct LogLevel(string Name, ConsoleColor? BackgroundColor, ConsoleColor? ForegroundColor) : IConsoleLogLevel;
         
         public static LogLevel Verbose { get; } = new("Verbose", null, ConsoleColor.DarkGray);
         

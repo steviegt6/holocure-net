@@ -20,6 +20,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Mod.Vanilla", "Hol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Core", "HoloCure.Core\HoloCure.Core.csproj", "{82B7815B-0E4A-4E8A-8D00-E3A0688325C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.EventBus", "HoloCure.EventBus\HoloCure.EventBus.csproj", "{19D1982E-A479-48C3-8EA3-72F386F7D69C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Reflection", "HoloCure.Reflection\HoloCure.Reflection.csproj", "{D2A73581-7A33-40D5-A24F-0E72029188DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Logging", "HoloCure.Logging\HoloCure.Logging.csproj", "{2F339BE8-E4C8-447B-BC96-615780C39FE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,5 +58,17 @@ Global
 		{82B7815B-0E4A-4E8A-8D00-E3A0688325C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82B7815B-0E4A-4E8A-8D00-E3A0688325C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82B7815B-0E4A-4E8A-8D00-E3A0688325C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D1982E-A479-48C3-8EA3-72F386F7D69C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D1982E-A479-48C3-8EA3-72F386F7D69C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D1982E-A479-48C3-8EA3-72F386F7D69C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D1982E-A479-48C3-8EA3-72F386F7D69C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2A73581-7A33-40D5-A24F-0E72029188DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A73581-7A33-40D5-A24F-0E72029188DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A73581-7A33-40D5-A24F-0E72029188DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A73581-7A33-40D5-A24F-0E72029188DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F339BE8-E4C8-447B-BC96-615780C39FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F339BE8-E4C8-447B-BC96-615780C39FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F339BE8-E4C8-447B-BC96-615780C39FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F339BE8-E4C8-447B-BC96-615780C39FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

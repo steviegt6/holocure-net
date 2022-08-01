@@ -1,5 +1,6 @@
 ﻿using System;
-using HoloCure.Core.Logging;
+using HoloCure.Logging;
+using HoloCure.Logging.Levels;
 
 namespace HoloCure.NET.Desktop.Logging.Writers
 {
@@ -7,11 +8,13 @@ namespace HoloCure.NET.Desktop.Logging.Writers
     {
         public void Log(string message, ILogLevel level) {
             Console.ResetColor();
-            if (level.ForegroundColor is not null) Console.ForegroundColor = level.ForegroundColor.Value;
-            if (level.BackgroundColor is not null) Console.BackgroundColor = level.BackgroundColor.Value;
+            if (level is IConsoleLogLevel consoleLevel) {
+                if (consoleLevel.ForegroundColor is not null) Console.ForegroundColor = consoleLevel.ForegroundColor.Value;
+                if (consoleLevel.BackgroundColor is not null) Console.BackgroundColor = consoleLevel.BackgroundColor.Value;
+            }
             Console.WriteLine(message);
         }
 
-        public void Dispose() { }
+        void IDisposable.Dispose() { }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.IO;
-using HoloCure.Core.Logging;
+using HoloCure.Logging;
+using HoloCure.Logging.Levels;
 
 namespace HoloCure.NET.Desktop.Logging.Writers
 {

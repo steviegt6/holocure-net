@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using HoloCure.Core.Launch;
-using HoloCure.Core.Logging;
+using HoloCure.EventBus;
+using HoloCure.EventBus.Attributes;
+using HoloCure.EventBus.Extensions;
+using HoloCure.Logging;
+using HoloCure.Logging.Levels;
 using HoloCure.NET.Desktop.Exceptions;
 using HoloCure.NET.Desktop.Launch;
 using HoloCure.NET.Desktop.Logging;
@@ -13,7 +18,60 @@ namespace HoloCure.NET.Desktop
 {
     public static class Program
     {
+        public class TestEvent : IEvent { }
+
+        public static int A;
+
+
+        [Subscriber]
+        public static void TestEventListener1(TestEvent theEvent) {
+            A++;
+        }
+        
+        [Subscriber]
+        public static void TestEventListener2(TestEvent theEvent) {
+            A++;
+        }
+        
+        [Subscriber]
+        public static void TestEventListener3(TestEvent theEvent) {
+            A++;
+        }
+        
+        [Subscriber]
+        public static void TestEventListener4(TestEvent theEvent) {
+            A++;
+        }
+        
+        [Subscriber]
+        public static void TestEventListener5(TestEvent theEvent) {
+            A++;
+        }
+        
+        [Subscriber]
+        public static void TestEventListener6(TestEvent theEvent) {
+            A++;
+        }
+        
         public static void Main(string[] args) {
+            Stopwatch sw = new();
+            sw.Start();
+            IEventBus bus = new SimpleEventBus();
+            sw.Stop();
+            Console.WriteLine("Init: " + sw.ElapsedMilliseconds);
+            
+            sw.Restart();
+            bus.RegisterStaticType(typeof(Program));
+            sw.Stop();
+            Console.WriteLine("Register: " + sw.ElapsedMilliseconds);
+            
+            sw.Restart();
+            for (int i = 0; i < 1000; i++) {
+                bus.DispatchEvent(new TestEvent());
+            }
+            sw.Stop();
+            Console.WriteLine("Dispatch: " + sw.ElapsedMilliseconds);
+            return;
             // Initialize FNA first, we want to be able to reliably load SDL for message boxes.
             // After that, immediately create a storage provider and logger - if that fails, we cannot do much.
             IStorageProvider storageProvider;

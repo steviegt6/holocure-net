@@ -2,8 +2,9 @@
 using System.IO;
 using HoloCure.Core.API.Loader;
 using HoloCure.Core.Launch;
-using HoloCure.Core.Logging;
 using HoloCure.Core.Util;
+using HoloCure.Logging;
+using HoloCure.Logging.Levels;
 using HoloCure.NET.Desktop.Loader;
 using HoloCure.NET.Desktop.Logging;
 using HoloCure.NET.Desktop.Util;
