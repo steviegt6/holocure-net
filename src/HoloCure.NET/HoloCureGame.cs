@@ -1,6 +1,7 @@
 ﻿using System;
 using HoloCure.Core;
 using HoloCure.Core.Util;
+using HoloCure.EventBus;
 using HoloCure.Loader;
 using HoloCure.Logging;
 using Microsoft.Xna.Framework;
@@ -18,6 +19,8 @@ namespace HoloCure.NET
         public override IStorageProvider StorageProvider { get; }
         
         public override ILogger Logger { get; }
+        
+        public override MasterEventBus MasterEventBus { get; }
 
         public HoloCureGame(IGameLauncher launcher) {
             Launcher = launcher;
@@ -25,6 +28,7 @@ namespace HoloCure.NET
             AssemblyLoader = Launcher.GetAssemblyLoader();
             StorageProvider = Launcher.GetStorageProvider();
             Logger = Launcher.GetLogger();
+            MasterEventBus = Launcher.GetMasterEventBus();
             
             GraphicsDeviceManager = new GraphicsDeviceManager(this);
 

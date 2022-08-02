@@ -1,5 +1,6 @@
 ﻿using HoloCure.Core;
 using HoloCure.Core.Util;
+using HoloCure.EventBus;
 using HoloCure.Loader;
 using HoloCure.Logging;
 using HoloCure.Logging.Levels;
@@ -17,9 +18,10 @@ namespace HoloCure.NET.Desktop.Launch
         public DesktopGameLauncher(IStorageProvider storageProvider, ILogger logger, string[] args) {
             Dependencies.AddSingleton<IGameLauncher>(this);
             Dependencies.AddSingleton(new GameData(GAME_NAME, args));
-            Dependencies.AddSingleton<IAssemblyLoader>(new AssemblyLoader());
+            Dependencies.AddSingleton<IAssemblyLoader>(new AssemblyLoader(this));
             Dependencies.AddSingleton(storageProvider);
             Dependencies.AddSingleton(logger);
+            Dependencies.AddSingleton(new MasterEventBus());
         }
 
         public CoreGame LaunchGame(string[] args) {

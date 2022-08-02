@@ -14,6 +14,7 @@ namespace HoloCure.NET.Desktop
 {
     public static class Program
     {
+        [STAThread]
         public static void Main(string[] args) {
             // Initialize FNA first, we want to be able to reliably load SDL for message boxes.
             // After that, immediately create a storage provider and logger - if that fails, we cannot do much.

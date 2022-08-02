@@ -1,4 +1,5 @@
-﻿using HoloCure.Loader;
+﻿using HoloCure.EventBus;
+using HoloCure.Loader;
 using HoloCure.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -47,6 +48,10 @@ namespace HoloCure.Core.Util
         
         public static ILogger GetLogger(this IGameLauncher launcher) {
             return launcher.GetService<ILogger>();
+        }
+        
+        public static MasterEventBus GetMasterEventBus(this IGameLauncher launcher) {
+            return launcher.GetService<MasterEventBus>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HoloCure.Loader;
+﻿using HoloCure.EventBus;
+using HoloCure.Loader;
 using HoloCure.Logging;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -34,6 +35,11 @@ namespace HoloCure.Core
         ///     The logger for this game instance.
         /// </summary>
         public abstract ILogger Logger { get; }
+
+        /// <summary>
+        ///     The event bus for this game instance.
+        /// </summary>
+        public abstract MasterEventBus MasterEventBus { get; }
 
         /// <summary>
         ///     The <see cref="GraphicsDeviceManager"/> instance used by this game.

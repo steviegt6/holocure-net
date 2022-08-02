@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Loader;
+using HoloCure.Core;
 using HoloCure.Loader;
 using HoloCure.NET.Desktop.Loader.Probers;
 using HoloCure.NET.Desktop.Util;
@@ -19,10 +20,13 @@ namespace HoloCure.NET.Desktop.Loader
 
         public ImmutableRegistrar<IModMetadata> ModRegistrar => new(Registrar);
 
+        protected readonly IGameLauncher Launcher;
         protected readonly List<IAssemblyProber> Probers = new();
         protected readonly Dictionary<IModMetadata, IAssemblyResolver> Resolvers = new();
 
-        public AssemblyLoader() {
+        public AssemblyLoader(IGameLauncher launcher) {
+            Launcher = launcher;
+
             AddProber(new TopLevelDirectoryProber(Environment.CurrentDirectory));
 
             string? loc = Path.GetDirectoryName(typeof(Program).Assembly.Location);
@@ -57,8 +61,8 @@ namespace HoloCure.NET.Desktop.Loader
             foreach (IModMetadata modMetadata in metadata) {
                 Resolvers[modMetadata].HookResolution();
                 modMetadata.LoadManifestFile();
-                modMetadata.InstantiateMod();
-                Registrar.Register(new Identifier("engine", modMetadata.Manifest!.ModId), modMetadata);
+                modMetadata.InstantiateMod(Launcher);
+                Registrar.Register(new Identifier(modMetadata.Manifest!.ModId, "mod"), modMetadata);
             }
         }
     }

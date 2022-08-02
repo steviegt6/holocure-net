@@ -1,4 +1,6 @@
 ﻿using HoloCure.EventBus;
+using HoloCure.Logging;
+using Microsoft.Extensions.DependencyInjection;
 #if COREMODDING
 using System.Collections.Generic;
 using Felt.Needle.API;
@@ -15,6 +17,13 @@ namespace HoloCure.Loader
         ///     This mod's <see cref="IEventBus"/> instance.
         /// </summary>
         IEventBus EventBus { get; }
+
+        ILogger Logger { get; }
+
+        /// <summary>
+        ///     External dependencies granted to this mod.
+        /// </summary>
+        IServiceCollection Dependencies { get; set; }
 
         /// <summary>
         ///     Called when this mod is first loaded.

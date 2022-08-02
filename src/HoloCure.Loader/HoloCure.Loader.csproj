@@ -3,11 +3,13 @@
     <Import Project="../shared.targets" />
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\HoloCure.EventBus\HoloCure.EventBus.csproj" />
+      <ProjectReference Include="..\HoloCure.Logging\HoloCure.Logging.csproj" />
       <ProjectReference Include="..\HoloCure.Registry\HoloCure.Registry.csproj" />
     </ItemGroup>
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using HoloCure.Core;
+using HoloCure.Core.Util;
 using HoloCure.Loader;
 using HoloCure.NET.Desktop.Exceptions;
 using HoloCure.NET.Desktop.Loader;
@@ -40,7 +42,7 @@ namespace HoloCure.NET.Desktop.Util
             metadata.Manifest = JsonConvert.DeserializeObject<ModFileManifest>(reader.ReadToEnd());
         }
 
-        public static void InstantiateMod(this IModMetadata metadata) {
+        public static void InstantiateMod(this IModMetadata metadata, IGameLauncher launcher) {
             if (metadata.Assembly is null) {
                 throw new ModLoadMissingAssemblyException(
                     metadata.GetModName(),
@@ -62,6 +64,8 @@ namespace HoloCure.NET.Desktop.Util
                 }
 
                 metadata.Mod = (IMod) Activator.CreateInstance(type)!;
+                metadata.Mod.Dependencies = launcher.Dependencies;
+                launcher.GetMasterEventBus().AddEventBus(metadata.Mod.EventBus);
                 metadata.Mod.Initialize();
             }
 
