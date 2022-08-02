@@ -1,1 +1,3 @@
-Fun little project working to port HoloCure to C# using FNA.
+# HoloCure.NET
+
+Fun little passion project I'm working.
