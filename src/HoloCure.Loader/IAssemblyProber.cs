@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace HoloCure.Core.API.Loader
+namespace HoloCure.Loader
 {
     /// <summary>
     ///     A prober for resolving valid assembly files.

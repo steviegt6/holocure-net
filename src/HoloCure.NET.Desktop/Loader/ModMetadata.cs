@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using HoloCure.Core.API;
+using HoloCure.Loader;
 
 namespace HoloCure.NET.Desktop.Loader
 {

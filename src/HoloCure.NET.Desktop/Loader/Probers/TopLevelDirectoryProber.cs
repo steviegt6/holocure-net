@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using HoloCure.Core.API.Loader;
+using HoloCure.Loader;
 
 namespace HoloCure.NET.Desktop.Loader.Probers
 {

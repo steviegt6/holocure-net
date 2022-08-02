@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using HoloCure.Core.API.Exceptions;
+﻿using System.Collections.ObjectModel;
+using HoloCure.Registry.Exceptions;
 
-namespace HoloCure.Core.API.Registry
+namespace HoloCure.Registry
 {
     /// <summary>
     ///     An immutable implementation of <see cref="IRegistrar"/>.

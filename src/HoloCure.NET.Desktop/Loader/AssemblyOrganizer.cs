@@ -1,4 +1,4 @@
-﻿using HoloCure.Core.API.Loader;
+﻿using HoloCure.Loader;
 
 namespace HoloCure.NET.Desktop.Loader
 {

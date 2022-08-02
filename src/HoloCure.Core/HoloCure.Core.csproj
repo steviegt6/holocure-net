@@ -10,11 +10,8 @@
     <ItemGroup>
       <ProjectReference Include="..\FNA\FNA.csproj" />
       <ProjectReference Include="..\HoloCure.EventBus\HoloCure.EventBus.csproj" />
+      <ProjectReference Include="..\HoloCure.Loader\HoloCure.Loader.csproj" />
       <ProjectReference Include="..\HoloCure.Logging\HoloCure.Logging.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Logging" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.Loader;
 
-namespace HoloCure.Core.API.Loader
+namespace HoloCure.Loader
 {
     /// <summary>
     ///     Responsible for resolving assemblies depended on by a parent assembly.

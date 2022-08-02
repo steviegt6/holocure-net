@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Loader;
-using HoloCure.Core.API;
-using HoloCure.Core.API.Loader;
-using HoloCure.Core.API.Registry;
+using HoloCure.Loader;
 using HoloCure.NET.Desktop.Loader.Probers;
 using HoloCure.NET.Desktop.Util;
+using HoloCure.Registry;
 
 namespace HoloCure.NET.Desktop.Loader
 {

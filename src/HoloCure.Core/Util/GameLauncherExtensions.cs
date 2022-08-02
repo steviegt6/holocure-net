@@ -1,5 +1,4 @@
-﻿using HoloCure.Core.API.Loader;
-using HoloCure.Core.Launch;
+﻿using HoloCure.Loader;
 using HoloCure.Logging;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -7,28 +7,37 @@ namespace HoloCure.EventBus.Store
     /// </summary>
     public class SimpleEventStore : IEventStore
     {
-        protected readonly Dictionary<Type, HashSet<IEventSubscriber>> Subscribers = new();
+        protected class DefaultDictionary : Dictionary<Type, HashSet<IEventSubscriber>>
+        {
+            public new HashSet<IEventSubscriber> this[Type key]
+            {
+                get {
+                    if (TryGetValue(key, out HashSet<IEventSubscriber>? value)) return value;
+                    return this[key] = new HashSet<IEventSubscriber>();
+                }
+
+                set => base[key] = value;
+            }
+        }
+        
+        protected readonly DefaultDictionary Subscribers = new();
         
         public virtual IEventSubscriber RegisterSubscriber(Type eventType, IEventSubscriber subscriber) {
-            HashSet<IEventSubscriber> subscribers = GetSubscribersFromMap(eventType);
+            HashSet<IEventSubscriber> subscribers = Subscribers[eventType];
             subscriber.OnRegistered(this);
             subscribers.Add(subscriber);
             return subscriber;
         }
 
         public virtual void UnregisterSubscriber(Type eventType, IEventSubscriber subscriber) {
-            HashSet<IEventSubscriber> subscribers = GetSubscribersFromMap(eventType);
+            HashSet<IEventSubscriber> subscribers = Subscribers[eventType];
             subscriber.OnUnregistered(this);
             subscribers.Remove(subscriber);
         }
 
         // Other event stores will probably want to override this, mostly.
         public virtual IEnumerable<IEventSubscriber> GetSubscribers(Type eventType) {
-            return GetSubscribersFromMap(eventType);
-        }
-
-        protected virtual HashSet<IEventSubscriber> GetSubscribersFromMap(Type eventType) {
-            return Subscribers.ContainsKey(eventType) ? Subscribers[eventType] : Subscribers[eventType] = new HashSet<IEventSubscriber>();
+            return Subscribers[eventType];
         }
     }
 }

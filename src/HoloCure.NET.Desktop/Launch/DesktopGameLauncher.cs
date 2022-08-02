@@ -1,15 +1,10 @@
-﻿using System;
-using System.IO;
-using HoloCure.Core.API.Loader;
-using HoloCure.Core.Launch;
+﻿using HoloCure.Core;
 using HoloCure.Core.Util;
+using HoloCure.Loader;
 using HoloCure.Logging;
 using HoloCure.Logging.Levels;
 using HoloCure.NET.Desktop.Loader;
-using HoloCure.NET.Desktop.Logging;
-using HoloCure.NET.Desktop.Util;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET.Desktop.Launch
 {
@@ -27,10 +22,10 @@ namespace HoloCure.NET.Desktop.Launch
             Dependencies.AddSingleton(logger);
         }
 
-        public Game LaunchGame(string[] args) {
+        public CoreGame LaunchGame(string[] args) {
             this.GetAssemblyLoader().LoadMods();
             this.GetLogger().Log("Launching game...", LogLevels.Debug);
-            return new HoloCureGame(this, args);
+            return new HoloCureGame(this);
         }
     }
 }

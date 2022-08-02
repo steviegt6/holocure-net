@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace HoloCure.Core.API.Registry
+﻿namespace HoloCure.Registry
 {
     /// <summary>
     ///     A singleton-based content registrar.

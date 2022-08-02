@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Felt.Needle.API;
 #endif
 
-namespace HoloCure.Core.API 
+namespace HoloCure.Loader 
 {
     /// <summary>
     ///     Represents a mod, which has ownership over its associated content and assembly.

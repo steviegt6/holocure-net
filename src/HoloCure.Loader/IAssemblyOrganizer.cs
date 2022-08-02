@@ -1,4 +1,4 @@
-﻿namespace HoloCure.Core.API.Loader
+﻿namespace HoloCure.Loader
 {
     public interface IAssemblyOrganizer
     {

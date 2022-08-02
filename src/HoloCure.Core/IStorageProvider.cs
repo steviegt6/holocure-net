@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace HoloCure.Core.Launch
+namespace HoloCure.Core
 {
     /// <summary>
     ///     Provides a path to a base storage directory.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Felt.Needle.API;
 #endif
 
-namespace HoloCure.Core.API
+namespace HoloCure.Loader
 {
     /// <summary>
     ///     A default, simplistic <see cref="IMod"/> implementation. This is what most mods will typically use.

@@ -1,6 +1,6 @@
-﻿using HoloCure.Core.API.Exceptions;
+﻿using HoloCure.Registry.Exceptions;
 
-namespace HoloCure.Core.API
+namespace HoloCure.Registry
 {
     /// <summary>
     ///     Represents a string lexer identifier, used to uniquely identify content.

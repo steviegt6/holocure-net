@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using HoloCure.Core.API.Exceptions;
+﻿using HoloCure.Registry.Exceptions;
 
-namespace HoloCure.Core.API.Registry
+namespace HoloCure.Registry
 {
     /// <summary>
     ///     A mutable implementation of <see cref="IRegistrar"/>.

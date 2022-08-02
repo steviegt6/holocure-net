@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using HoloCure.Core.Launch;
+using HoloCure.Core;
 
 namespace HoloCure.NET.Desktop.Launch.Platform
 {

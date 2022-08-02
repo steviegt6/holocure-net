@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using HoloCure.Core.API.Registry;
+using HoloCure.Registry;
 
-namespace HoloCure.Core.API.Loader
+namespace HoloCure.Loader
 {
     /// <summary>
     ///     Handles resolving and loading mod assemblies.

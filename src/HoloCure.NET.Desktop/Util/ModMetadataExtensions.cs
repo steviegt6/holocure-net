@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using HoloCure.Core.API;
+using HoloCure.Loader;
 using HoloCure.NET.Desktop.Loader;
 using Newtonsoft.Json;
 

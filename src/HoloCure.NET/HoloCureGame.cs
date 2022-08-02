@@ -1,18 +1,15 @@
 ﻿using System;
-using HoloCure.Core.Launch;
+using HoloCure.Core;
 using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET
 {
-    public sealed class HoloCureGame : Game, ILaunchableGame
+    public sealed class HoloCureGame : CoreGame
     {
-        public IGameLauncher Launcher { get; }
+        public override IGameLauncher Launcher { get; }
 
-        public string[] Arguments { get; }
-
-        public HoloCureGame(IGameLauncher launcher, string[] arguments) {
+        public HoloCureGame(IGameLauncher launcher) {
             Launcher = launcher;
-            Arguments = arguments;
             
             Services.AddService(typeof(GraphicsDeviceManager), new GraphicsDeviceManager(this));
 

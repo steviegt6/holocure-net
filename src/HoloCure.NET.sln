@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Reflection", "Holo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Logging", "HoloCure.Logging\HoloCure.Logging.csproj", "{2F339BE8-E4C8-447B-BC96-615780C39FE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Loader", "HoloCure.Loader\HoloCure.Loader.csproj", "{826AF775-4AF9-45A9-A568-CD63CE982108}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Registry", "HoloCure.Registry\HoloCure.Registry.csproj", "{7A5A97B6-1A77-4F64-BB63-5D2D144E30F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,5 +74,13 @@ Global
 		{2F339BE8-E4C8-447B-BC96-615780C39FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F339BE8-E4C8-447B-BC96-615780C39FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F339BE8-E4C8-447B-BC96-615780C39FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826AF775-4AF9-45A9-A568-CD63CE982108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826AF775-4AF9-45A9-A568-CD63CE982108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826AF775-4AF9-45A9-A568-CD63CE982108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826AF775-4AF9-45A9-A568-CD63CE982108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5A97B6-1A77-4F64-BB63-5D2D144E30F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5A97B6-1A77-4F64-BB63-5D2D144E30F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5A97B6-1A77-4F64-BB63-5D2D144E30F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5A97B6-1A77-4F64-BB63-5D2D144E30F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

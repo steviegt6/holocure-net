@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace HoloCure.Core.API.Exceptions
+namespace HoloCure.Registry.Exceptions
 {
     [Serializable]
     public class ImmutableRegistrarException : Exception

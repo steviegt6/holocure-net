@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 
-namespace HoloCure.Core.Launch
+namespace HoloCure.Core
 {
     /// <summary>
     ///     Launches a game.
@@ -18,6 +18,6 @@ namespace HoloCure.Core.Launch
         /// </summary>
         /// <param name="args">The game's launch arguments.</param>
         /// <returns>The instantiated game.</returns>
-        Game? LaunchGame(string[] args);
+        CoreGame? LaunchGame(string[] args);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using HoloCure.Core.Launch;
+using HoloCure.Core;
 using HoloCure.Logging;
 using HoloCure.Logging.Levels;
 using HoloCure.NET.Desktop.Exceptions;

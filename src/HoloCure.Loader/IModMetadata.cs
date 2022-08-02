@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace HoloCure.Core.API
+namespace HoloCure.Loader
 {
     /// <summary>
     ///     Runtime information about a <see cref="IMod"/>, created and partially populated prior to the instantiation of a <see cref="IMod"/>.

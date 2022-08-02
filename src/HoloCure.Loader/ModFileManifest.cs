@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Newtonsoft.Json;
 
-namespace HoloCure.Core.API
+namespace HoloCure.Loader
 {
     /// <summary>
     ///     JSON template for a mod manifest file.
@@ -15,8 +15,10 @@ namespace HoloCure.Core.API
         [DefaultValue("")]
         public string ModId { get; set; } = "";
 
+#if COREMODDING
         [JsonProperty("coremod")]
         [DefaultValue(false)]
         public bool Coremod { get; set; } = false;
+#endif
     }
 }
