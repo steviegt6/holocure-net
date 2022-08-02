@@ -1,5 +1,8 @@
 ﻿using System;
 using HoloCure.Core;
+using HoloCure.Core.Util;
+using HoloCure.Loader;
+using HoloCure.Logging;
 using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET
@@ -7,11 +10,23 @@ namespace HoloCure.NET
     public sealed class HoloCureGame : CoreGame
     {
         public override IGameLauncher Launcher { get; }
+        
+        public override GameData GameData { get; }
+        
+        public override IAssemblyLoader AssemblyLoader { get; }
+        
+        public override IStorageProvider StorageProvider { get; }
+        
+        public override ILogger Logger { get; }
 
         public HoloCureGame(IGameLauncher launcher) {
             Launcher = launcher;
+            GameData = Launcher.GetGameData();
+            AssemblyLoader = Launcher.GetAssemblyLoader();
+            StorageProvider = Launcher.GetStorageProvider();
+            Logger = Launcher.GetLogger();
             
-            Services.AddService(typeof(GraphicsDeviceManager), new GraphicsDeviceManager(this));
+            GraphicsDeviceManager = new GraphicsDeviceManager(this);
 
             Window.AllowUserResizing = false;
             Window.Title = "HoloCure";

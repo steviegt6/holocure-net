@@ -57,9 +57,18 @@ namespace HoloCure.NET.Desktop
             try {
                 logger.Log("Creating launcher...", LogLevels.Debug);
                 IGameLauncher launcher = CreateLauncher(storageProvider, logger, args);
-                
-                logger.Log("Launching game...", LogLevels.Debug);
+
+                logger.Log("Telling launcher to launch game...", LogLevels.Debug);
                 game = launcher.LaunchGame(args);
+            }
+            catch (ModLoadException e) {
+                LogMessageBox(
+                    "Fatal Exception Loading Mod: " + e.Mod,
+                    $"A fatal exception has occured whilst loading the mod \"{e.Mod}\" and the program may no longer execute.\nStacktrace:\n\n" + e,
+                    IntPtr.Zero,
+                    logger
+                );
+                throw;
             }
             catch (Exception e) {
                 LogMessageBox(

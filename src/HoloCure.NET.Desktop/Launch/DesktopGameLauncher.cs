@@ -24,7 +24,7 @@ namespace HoloCure.NET.Desktop.Launch
 
         public CoreGame LaunchGame(string[] args) {
             this.GetAssemblyLoader().LoadMods();
-            this.GetLogger().Log("Launching game...", LogLevels.Debug);
+            this.GetLogger().Log($"Launching game from {nameof(DesktopGameLauncher)}...", LogLevels.Debug);
             return new HoloCureGame(this);
         }
     }

@@ -9,7 +9,7 @@ namespace HoloCure.Core
     public interface IGameLauncher
     {
         /// <summary>
-        ///     The central service provider powering game-wide dependency injection.
+        ///     This launcher's dependency provider.
         /// </summary>
         IServiceCollection Dependencies { get; }
         
