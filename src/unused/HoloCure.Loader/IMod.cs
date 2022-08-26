@@ -18,6 +18,9 @@ namespace HoloCure.Loader
         /// </summary>
         IEventBus EventBus { get; }
 
+        /// <summary>
+        ///     The logger.
+        /// </summary>
         ILogger Logger { get; }
 
         /// <summary>

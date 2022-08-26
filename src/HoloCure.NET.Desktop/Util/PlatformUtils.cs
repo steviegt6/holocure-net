@@ -1,30 +1,40 @@
 ﻿using System;
 using System.IO;
-using HoloCure.Core;
-using HoloCure.NET.Desktop.Launch.Platform;
 
 namespace HoloCure.NET.Desktop.Util
 {
     public static class PlatformUtils
     {
-        public static IStorageProvider MakePlatformDependentStorageProvider(string folderName) {
-            IStorageProvider provider;
+        public static string GetPlatformDependentStoragePath(string folderName) {
+            string path;
 
             if (OperatingSystem.IsWindows())
-                provider = new WindowsStorageProvider(folderName);
+                path = GetWindowsStoragePath();
             else if (OperatingSystem.IsMacOS())
-                provider = new MacStorageProvider(folderName);
+                path = GetUnixStoragePath();
             else if (OperatingSystem.IsLinux())
-                provider = new LinuxStorageProvider(folderName);
+                path = GetUnixStoragePath();
             else
-                throw new PlatformNotSupportedException("Cannot create a storage provider for your operating system.");
-            
-            string dir = provider.GetDirectory();
+                throw new PlatformNotSupportedException("Cannot resolve a storage path for your platform.");
+
+            string dir = Path.Combine(path, folderName);
 
             if (File.Exists(dir)) throw new DirectoryNotFoundException("A file with the name \"" + dir + "\" already exists!");
             if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
-            return provider;
+            return dir;
+        }
+
+        public static string GetWindowsStoragePath() {
+            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        }
+
+        public static string GetUnixStoragePath() {
+            string? xdgPath = Environment.GetEnvironmentVariable("XDG_DATA_HOME");
+
+            return string.IsNullOrEmpty(xdgPath)
+                ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".local", "share")
+                : xdgPath;
         }
     }
 }

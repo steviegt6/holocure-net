@@ -1,4 +1,6 @@
 ﻿using HoloCure.EventBus;
+using HoloCure.Logging;
+using Microsoft.Extensions.DependencyInjection;
 #if COREMODDING
 using System.Collections.Generic;
 using Felt.Needle.API;
@@ -12,7 +14,11 @@ namespace HoloCure.Loader
     public abstract class DefaultMod : IMod
     {
         public virtual IEventBus EventBus { get; } = new SimpleEventBus();
-        
+
+        public virtual ILogger Logger { get; } = null!;
+
+        public virtual IServiceCollection Dependencies { get; set; } = null!;
+
         public virtual void Initialize() {
         }
 

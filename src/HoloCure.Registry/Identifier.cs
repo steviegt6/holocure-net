@@ -7,6 +7,11 @@ namespace HoloCure.Registry
     /// </summary>
     public readonly record struct Identifier(string Namespace, string Content)
     {
+        public const string DEFAULT_NAMESPACE = "holocure";
+
+        public Identifier(string content) : this(DEFAULT_NAMESPACE, content) {
+        }
+        
         public override string ToString() {
             return $"{Namespace}:{Content}";
         }

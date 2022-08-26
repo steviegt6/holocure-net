@@ -3,14 +3,9 @@
     <Import Project="../shared.targets" />
 
     <ItemGroup>
-      <ProjectReference Include="..\HoloCure.Core\HoloCure.Core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Felt.Needle" Version="1.0.0" />
-      <PackageReference Include="Felt.Needle.Visitors" Version="1.0.0" />
-      <PackageReference Include="Mono.Cecil" Version="0.11.4" />
-      <PackageReference Include="MonoMod.RuntimeDetour" Version="22.5.1.1" />
+      <ProjectReference Include="..\FNA\FNA.csproj" />
+      <ProjectReference Include="..\HoloCure.Logging\HoloCure.Logging.csproj" />
+      <ProjectReference Include="..\HoloCure.Registry\HoloCure.Registry.csproj" />
     </ItemGroup>
 
 </Project>

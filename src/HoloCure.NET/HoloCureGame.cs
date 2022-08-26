@@ -1,35 +1,18 @@
-﻿using System;
-using HoloCure.Core;
-using HoloCure.Core.Util;
-using HoloCure.EventBus;
-using HoloCure.Loader;
-using HoloCure.Logging;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace HoloCure.NET
 {
-    public sealed class HoloCureGame : CoreGame
+    public sealed class HoloCureGame : Game
     {
-        public override IGameLauncher Launcher { get; }
-        
-        public override GameData GameData { get; }
-        
-        public override IAssemblyLoader AssemblyLoader { get; }
-        
-        public override IStorageProvider StorageProvider { get; }
-        
-        public override ILogger Logger { get; }
-        
-        public override MasterEventBus MasterEventBus { get; }
+        public GraphicsDeviceManager? GraphicsDeviceManager {
+            get => (GraphicsDeviceManager?) Services.GetService(typeof(GraphicsDeviceManager));
 
-        public HoloCureGame(IGameLauncher launcher) {
-            Launcher = launcher;
-            GameData = Launcher.GetGameData();
-            AssemblyLoader = Launcher.GetAssemblyLoader();
-            StorageProvider = Launcher.GetStorageProvider();
-            Logger = Launcher.GetLogger();
-            MasterEventBus = Launcher.GetMasterEventBus();
-            
+            set {
+                if (GraphicsDeviceManager is not null) Services.RemoveService(typeof(GraphicsDeviceManager));
+                Services.AddService(typeof(GraphicsDeviceManager), value);
+            }
+        }
+        public HoloCureGame(string storagePath) {
             GraphicsDeviceManager = new GraphicsDeviceManager(this);
 
             Window.AllowUserResizing = false;

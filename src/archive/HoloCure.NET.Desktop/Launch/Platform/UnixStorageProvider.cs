@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.IO;
 
 namespace HoloCure.NET.Desktop.Launch.Platform
@@ -20,3 +21,4 @@ namespace HoloCure.NET.Desktop.Launch.Platform
         }
     }
 }
+#endif

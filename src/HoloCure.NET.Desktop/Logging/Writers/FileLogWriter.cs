@@ -11,7 +11,8 @@ namespace HoloCure.NET.Desktop.Logging.Writers
 
         protected FileLogWriter(string path) {
             SavePath = path;
-
+            
+            Directory.CreateDirectory(Path.GetDirectoryName(SavePath) ?? "");
             Stream stream = File.Open(SavePath, FileMode.Create, FileAccess.Write, FileShare.Read);
             Writer = new StreamWriter(stream)
             {

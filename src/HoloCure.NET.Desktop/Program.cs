@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using HoloCure.Core;
 using HoloCure.Logging;
 using HoloCure.Logging.Levels;
-using HoloCure.NET.Desktop.Exceptions;
-using HoloCure.NET.Desktop.Launch;
 using HoloCure.NET.Desktop.Logging;
 using HoloCure.NET.Desktop.Logging.Writers;
 using HoloCure.NET.Desktop.Util;
@@ -18,9 +15,6 @@ namespace HoloCure.NET.Desktop
         public static void Main(string[] args) {
             // Initialize FNA first, we want to be able to reliably load SDL for message boxes.
             // After that, immediately create a storage provider and logger - if that fails, we cannot do much.
-            IStorageProvider storageProvider;
-            ILogger logger;
-
             try {
                 FnaBootstrap.Initialize_FNA();
             }
@@ -31,16 +25,22 @@ namespace HoloCure.NET.Desktop
                 throw;
             }
 
+            string saveDir;
+            GameLogger.SourceLogger logger;
+
             try {
-                storageProvider = PlatformUtils.MakePlatformDependentStorageProvider(DesktopGameLauncher.GAME_NAME);
-                logger = new DesktopLogger(
-                    // Log to the console.
-                    new ConsoleLogWriter(),
-                    // Log to an archivable log file (one that won't be cleared).
-                    new ArchivableFileLogWriter(Path.Combine(storageProvider.GetDirectory(), "game"), ".log", DateTime.Now),
-                    // Log to a temporary log file ("latest.log")
-                    new TemporaryFileLogWriter(Path.Combine(storageProvider.GetDirectory(), "latest"), ".log")
+                saveDir = PlatformUtils.GetPlatformDependentStoragePath("HoloCure");
+                GameLogger.InitializeLogger(
+                    new DesktopLogger(
+                        // Log to the console.
+                        new ConsoleLogWriter(),
+                        // Log to an archivable log file (one that won't be cleared).
+                        new ArchivableFileLogWriter(Path.Combine(saveDir, "Logs", "Archive", "game"), ".log", DateTime.Now),
+                        // Log to a temporary log file ("latest.log")
+                        new TemporaryFileLogWriter(Path.Combine(saveDir, "Logs", "latest"), ".log")
+                    )
                 );
+                logger = GameLogger.MakeLogger("Launcher");
             }
             catch (Exception e) {
                 MessageBox.MakeError_Simple(
@@ -56,20 +56,8 @@ namespace HoloCure.NET.Desktop
             Game? game;
 
             try {
-                logger.Log("Creating launcher...", LogLevels.Debug);
-                IGameLauncher launcher = CreateLauncher(storageProvider, logger, args);
-
-                logger.Log("Telling launcher to launch game...", LogLevels.Debug);
-                game = launcher.LaunchGame(args);
-            }
-            catch (ModLoadException e) {
-                LogMessageBox(
-                    "Fatal Exception Loading Mod: " + e.Mod,
-                    $"A fatal exception has occured whilst loading the mod \"{e.Mod}\" and the program may no longer execute.\nStacktrace:\n\n" + e,
-                    IntPtr.Zero,
-                    logger
-                );
-                throw;
+                logger.Log("Instantiating Game object...", LogLevels.Debug);
+                game = new HoloCureGame(saveDir);
             }
             catch (Exception e) {
                 LogMessageBox(
@@ -81,25 +69,9 @@ namespace HoloCure.NET.Desktop
                 throw;
             }
 
-            // The launcher may return null if it's used for other tasks.
-            if (game is null) {
-                logger.Log("Launched game was null.", LogLevels.Info);
-                return;
-            }
-
             try {
                 logger.Log("Entering game loop...", LogLevels.Debug);
                 game.Run();
-            }
-            catch (MessageBoxException e) {
-                Exception inner = e.InnerException ?? e;
-                LogMessageBox(
-                    e.Title,
-                    e.Message + "\nStacktrace:\n" + inner.StackTrace,
-                    game.Window.Handle,
-                    logger
-                );
-                throw inner;
             }
             catch (Exception e) {
                 LogMessageBox(
@@ -110,6 +82,12 @@ namespace HoloCure.NET.Desktop
                 );
                 throw;
             }
+
+            logger.Log("Exited game loop, assuming safe exit. Disposing of Game instance...", LogLevels.Debug);
+            game.Dispose();
+
+            logger.Log("Disposing of logger...", LogLevels.Debug);
+            GameLogger.DisposeLogger();
         }
 
         private static void LogMessageBox(string title, string message, IntPtr handle, ILogger logger) {
@@ -120,8 +98,8 @@ namespace HoloCure.NET.Desktop
         // args.Contains("--skip-coremods")
         // bool skipCoremods
         // new CoremodLauncher()
-        public static IGameLauncher CreateLauncher(IStorageProvider storageProvider, ILogger logger, string[] args) {
+        /*public static IGameLauncher CreateLauncher(IStorageProvider storageProvider, ILogger logger, string[] args) {
             return new DesktopGameLauncher(storageProvider, logger, args);
-        }
+        }*/
     }
 }

@@ -1,4 +1,5 @@
-﻿using HoloCure.EventBus;
+﻿using HoloCure.Core.ECS;
+using HoloCure.EventBus;
 using HoloCure.Loader;
 using HoloCure.Logging;
 using Microsoft.Xna.Framework;
@@ -40,6 +41,10 @@ namespace HoloCure.Core
         ///     The event bus for this game instance.
         /// </summary>
         public abstract MasterEventBus MasterEventBus { get; }
+
+        protected abstract World World { get; }
+
+        protected abstract Dispatcher Dispatcher { get; }
 
         /// <summary>
         ///     The <see cref="GraphicsDeviceManager"/> instance used by this game.

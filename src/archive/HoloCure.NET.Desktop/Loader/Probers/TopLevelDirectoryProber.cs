@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using HoloCure.Loader;
@@ -19,3 +20,4 @@ namespace HoloCure.NET.Desktop.Loader.Probers
         }
     }
 }
+#endif

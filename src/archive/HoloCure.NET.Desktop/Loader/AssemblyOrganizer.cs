@@ -1,4 +1,5 @@
-﻿using HoloCure.Loader;
+﻿#if false
+using HoloCure.Loader;
 
 namespace HoloCure.NET.Desktop.Loader
 {
@@ -7,3 +8,4 @@ namespace HoloCure.NET.Desktop.Loader
         // TODO
     }
 }
+#endif

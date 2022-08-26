@@ -1,4 +1,5 @@
-﻿using HoloCure.Core;
+﻿#if false
+using HoloCure.Core;
 using HoloCure.Core.Util;
 using HoloCure.EventBus;
 using HoloCure.Loader;
@@ -31,3 +32,4 @@ namespace HoloCure.NET.Desktop.Launch
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.IO;
 using System.Linq;
 using HoloCure.Core;
@@ -82,3 +83,4 @@ namespace HoloCure.NET.Desktop.Util
         }
     }
 }
+#endif

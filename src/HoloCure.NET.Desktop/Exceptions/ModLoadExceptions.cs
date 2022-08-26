@@ -8,24 +8,10 @@ namespace HoloCure.NET.Desktop.Exceptions
     {
         public string Mod { get; }
 
-        protected ModLoadException(string mod) {
-            Mod = mod;
-        }
-
-        protected ModLoadException(string mod, string message) : base(message) {
-            Mod = mod;
-        }
-
-        protected ModLoadException(string mod, string message, Exception inner) : base(message, inner) {
-            Mod = mod;
-        }
-
-        protected ModLoadException(
-            SerializationInfo info,
-            StreamingContext context
-        ) : base(info, context) {
-            Mod = "Serialized";
-        }
+        protected ModLoadException(string mod) { Mod = mod; }
+        protected ModLoadException(string mod, string message) : base(message) { Mod = mod; }
+        protected ModLoadException(string mod, string message, Exception inner) : base(message, inner) { Mod = mod; }
+        protected ModLoadException(SerializationInfo info, StreamingContext context) : base(info, context) { Mod = "Serialized"; }
     }
 
     [Serializable]
@@ -36,7 +22,7 @@ namespace HoloCure.NET.Desktop.Exceptions
         public ModLoadMissingAssemblyException(string mod, string message, Exception inner) : base(mod, message, inner) { }
         protected ModLoadMissingAssemblyException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
-    
+
     [Serializable]
     public class ModLoadMissingManifestException : ModLoadException
     {
@@ -45,7 +31,7 @@ namespace HoloCure.NET.Desktop.Exceptions
         public ModLoadMissingManifestException(string mod, string message, Exception inner) : base(mod, message, inner) { }
         protected ModLoadMissingManifestException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
-    
+
     [Serializable]
     public class ModLoadMissingModInterfaceException : ModLoadException
     {
@@ -54,7 +40,7 @@ namespace HoloCure.NET.Desktop.Exceptions
         public ModLoadMissingModInterfaceException(string mod, string message, Exception inner) : base(mod, message, inner) { }
         protected ModLoadMissingModInterfaceException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
-    
+
     [Serializable]
     public class ModLoadMultipleModInterfacesException : ModLoadException
     {

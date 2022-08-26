@@ -8,11 +8,9 @@
 
     <ItemGroup>
       <PackageReference Include="fnalibs" Version="21.7.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HoloCure.Mod.Vanilla\HoloCure.Mod.Vanilla.csproj" />
       <ProjectReference Include="..\HoloCure.NET\HoloCure.NET.csproj" />
     </ItemGroup>
 

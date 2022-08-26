@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using HoloCure.Core;
 using HoloCure.Loader;
 using HoloCure.NET.Desktop.Loader.Probers;
 using HoloCure.NET.Desktop.Util;
+using HoloCure.NET.Registries;
 using HoloCure.Registry;
 
 namespace HoloCure.NET.Desktop.Loader
@@ -15,10 +17,6 @@ namespace HoloCure.NET.Desktop.Loader
     {
         public const string PREFIX = "HoloCure.Mod.";
         public const string MANIFEST_NAME = "manifest.json";
-
-        protected readonly IRegistrar<IModMetadata> Registrar = new MutableRegistrar<IModMetadata>();
-
-        public ImmutableRegistrar<IModMetadata> ModRegistrar => new(Registrar);
 
         protected readonly IGameLauncher Launcher;
         protected readonly List<IAssemblyProber> Probers = new();
@@ -62,8 +60,9 @@ namespace HoloCure.NET.Desktop.Loader
                 Resolvers[modMetadata].HookResolution();
                 modMetadata.LoadManifestFile();
                 modMetadata.InstantiateMod(Launcher);
-                Registrar.Register(new Identifier(modMetadata.Manifest!.ModId, "mod"), modMetadata);
+                GlobalRegistrar.ModRegistrar.Register(new Identifier(modMetadata.Manifest!.ModId, "mod"), modMetadata);
             }
         }
     }
 }
+#endif
