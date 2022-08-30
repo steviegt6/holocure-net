@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ProjectVersion>1.0.0</ProjectVersion>
+    </PropertyGroup>
+
+    <Import Project="../shared.targets"/>
+
+    <ItemGroup>
+        <ProjectReference Include="..\HoloCure.Framework\HoloCure.Framework.csproj"/>
+    </ItemGroup>
+
+</Project>

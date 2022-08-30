@@ -14,7 +14,7 @@
 
   <!-- Default version -->
   <PropertyGroup Condition=" '$(ProjectVersion)' == '' ">
-    <ProjectVersion>0.0.0</ProjectVersion>
+    <ProjectVersion>1.0.0</ProjectVersion>
   </PropertyGroup>
 
   <!-- Assign assembly version data. -->

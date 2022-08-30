@@ -10,7 +10,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Files", "Project Files", "{96B2AD88-4166-48EE-B42B-5F430AFF43BD}"
 	ProjectSection(SolutionItems) = preProject
 		shared.targets = shared.targets
+		.editorconfig = .editorconfig
+		.licenseheader = .licenseheader
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.Framework", "HoloCure.Framework\HoloCure.Framework.csproj", "{2DFF8170-B63B-49FD-8730-AB09FDDBD97C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.NET", "HoloCure.NET\HoloCure.NET.csproj", "{B6F3DA56-495C-40A5-9A23-F6C50559FA32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloCure.NET.Desktop", "HoloCure.NET.Desktop\HoloCure.NET.Desktop.csproj", "{CA1F0CDE-AFE8-480E-B277-9569E2565443}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,5 +36,17 @@ Global
 		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DFF8170-B63B-49FD-8730-AB09FDDBD97C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DFF8170-B63B-49FD-8730-AB09FDDBD97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DFF8170-B63B-49FD-8730-AB09FDDBD97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DFF8170-B63B-49FD-8730-AB09FDDBD97C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F3DA56-495C-40A5-9A23-F6C50559FA32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F3DA56-495C-40A5-9A23-F6C50559FA32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F3DA56-495C-40A5-9A23-F6C50559FA32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F3DA56-495C-40A5-9A23-F6C50559FA32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1F0CDE-AFE8-480E-B277-9569E2565443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1F0CDE-AFE8-480E-B277-9569E2565443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1F0CDE-AFE8-480E-B277-9569E2565443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1F0CDE-AFE8-480E-B277-9569E2565443}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

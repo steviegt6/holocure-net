@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ProjectVersion>1.0.0</ProjectVersion>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <Import Project="../shared.targets" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\HoloCure.NET\HoloCure.NET.csproj" />
+    </ItemGroup>
+
+</Project>
