@@ -1,5 +1,7 @@
 # HoloCure.NET
 
+> > [\[discord\]](https://discord.gg/KvqKGQNbhr)
+
 Fun little passion project I'm working.
 
 ## Projects
